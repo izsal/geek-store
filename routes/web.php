@@ -44,5 +44,9 @@ Route::prefix('account')->group(function () {
         //route permissions
         Route::get('/permissions', \App\Http\Controllers\Account\PermissionController::class)->name('account.permissions.index')
             ->middleware('permission:permissions.index');
+
+        //route resource roles
+        Route::resource('/roles', \App\Http\Controllers\Account\RoleController::class, ['as' => 'account'])
+            ->middleware('permission:roles.index|roles.create|roles.edit|roles.delete');
     });
 });
