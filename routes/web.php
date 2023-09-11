@@ -31,3 +31,14 @@ Route::post('/login', [\App\Http\Controllers\Auth\LoginController::class, 'store
 
 //route logout
 Route::post('/logout', \App\Http\Controllers\Auth\LogoutController::class)->name('logout')->middleware('auth');
+
+//prefix "account"
+Route::prefix('account')->group(function () {
+
+    //middleware "auth"
+    Route::group(['middleware' => ['auth']], function () {
+
+        //route dashboard
+        Route::get('/dashboard', App\Http\Controllers\Account\DashboardController::class)->name('account.dashboard');
+    });
+});
