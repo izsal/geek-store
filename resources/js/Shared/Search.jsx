@@ -19,16 +19,16 @@ export default function Search({ URL }) {
     return (
         <>
             <form onSubmit={searchHandler}>
-                <div class="input-group">
+                <div className="input-group">
                     <input
                         type="text"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        class="form-control border-0 shadow-sm"
+                        className="form-control border-0 shadow-sm"
                         placeholder="type keywords and enter..."
                     />
-                    <span class="input-group-text-search border-0 shadow-sm">
-                        <i class="fa fa-search"></i>
+                    <span className="input-group-text-search border-0 shadow-sm">
+                        <i className="fa fa-search"></i>
                     </span>
                 </div>
             </form>

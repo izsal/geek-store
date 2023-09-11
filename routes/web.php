@@ -40,5 +40,9 @@ Route::prefix('account')->group(function () {
 
         //route dashboard
         Route::get('/dashboard', App\Http\Controllers\Account\DashboardController::class)->name('account.dashboard');
+
+        //route permissions
+        Route::get('/permissions', \App\Http\Controllers\Account\PermissionController::class)->name('account.permissions.index')
+            ->middleware('permission:permissions.index');
     });
 });
