@@ -56,5 +56,9 @@ Route::prefix('account')->group(function () {
         //route resource colors
         Route::resource('/colors', \App\Http\Controllers\Account\ColorController::class, ['as' => 'account'])
             ->middleware('permission:colors.index|colors.create|colors.edit|colors.delete');
+
+        //route resource categories
+        Route::resource('/categories', \App\Http\Controllers\Account\CategoryController::class, ['as' => 'account'])
+            ->middleware('permission:categories.index|categories.create|categories.edit|categories.delete');
     });
 });
