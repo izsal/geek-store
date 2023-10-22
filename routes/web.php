@@ -60,5 +60,19 @@ Route::prefix('account')->group(function () {
         //route resource categories
         Route::resource('/categories', \App\Http\Controllers\Account\CategoryController::class, ['as' => 'account'])
             ->middleware('permission:categories.index|categories.create|categories.edit|categories.delete');
+
+        //route store image product
+        Route::post('/products/store_image_product', [\App\Http\Controllers\Account\ProductController::class, 'storeImageProduct'])->name('account.products.store_image_product');
+
+        //route destroy image product
+        Route::delete('/products/destroy_image_product/{id}', [\App\Http\Controllers\Account\ProductController::class, 'destroyImage'])->name('account.products.destroy_image_product');
+
+        //route resource products
+        Route::resource('/products', \App\Http\Controllers\Account\ProductController::class, ['as' => 'account'])
+            ->middleware('permission:products.index|products.create|products.show|products.edit|products.delete');
+
+        //route resource sliders
+        Route::resource('/sliders', App\Http\Controllers\Account\SliderController::class, ['except' => ['create', 'show', 'edit', 'update'], 'as' => 'account'])
+            ->middleware('permission:sliders.index|sliders.create|sliders.delete');
     });
 });

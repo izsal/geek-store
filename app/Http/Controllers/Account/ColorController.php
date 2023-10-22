@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Account;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Color;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
 class ColorController extends Controller
 {
     /**
-     * index
+     * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -22,7 +22,7 @@ class ColorController extends Controller
         })->latest()->paginate(5);
 
         //append query string to pagination links
-        $colors->appends(['q' =>  request()->q]);
+        $colors->appends(['q' => request()->q]);
 
         //render with inertia
         return inertia('Account/Colors/Index', [
@@ -31,9 +31,9 @@ class ColorController extends Controller
     }
 
     /**
-     * create
+     * Show the form for creating a new resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
@@ -42,19 +42,19 @@ class ColorController extends Controller
     }
 
     /**
-     * store
+     * Store a newly created resource in storage.
      *
-     * @param  mixed $request
-     * @return void
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
         /**
-         * validate request
+         * Validate request
          */
         $this->validate($request, [
-            'name'  => 'required',
-            'image' => 'required|mimes:png,jpg',
+            'name'      => 'required',
+            'image'     => 'required|mimes:png,jpg',
         ]);
 
         //upload image
@@ -64,18 +64,18 @@ class ColorController extends Controller
         //create color
         $color = Color::create([
             'name'  => $request->name,
-            'image' => $image->hashName(),
+            'image' => $image->hashName()
         ]);
 
-        //redirect 
+        //redirect
         return redirect()->route('account.colors.index');
     }
 
     /**
-     * edit
+     * Show the form for editing the specified resource.
      *
-     * @param  mixed $id
-     * @return void
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -84,7 +84,7 @@ class ColorController extends Controller
 
         //render with inertia
         return inertia('Account/Colors/Edit', [
-            'color'  => $color,
+            'color'          => $color,
         ]);
     }
 

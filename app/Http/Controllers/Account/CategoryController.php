@@ -8,14 +8,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
-
-
 class CategoryController extends Controller
 {
     /**
-     * index
+     * Display a listing of the resource.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
     public function index()
     {
@@ -24,8 +22,10 @@ class CategoryController extends Controller
             $categories = $categories->where('name', 'like', '%' . request()->q . '%');
         })->latest()->paginate(5);
 
+        //append query string to pagination links
         $categories->appends(['q' => request()->q]);
 
+        //return inertia
         return inertia('Account/Categories/Index', [
             'categories' => $categories,
         ]);

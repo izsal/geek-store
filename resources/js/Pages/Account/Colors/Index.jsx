@@ -16,9 +16,6 @@ import Search from "../../../Shared/Search";
 //import component pagination
 import Pagination from "../../../Shared/Pagination";
 
-//import component delete
-import Delete from "../../../Shared/Delete";
-
 export default function ColorIndex() {
     //destruct props "colors"
     const { colors } = usePage().props;
@@ -118,12 +115,9 @@ export default function ColorIndex() {
                                                         {hasAnyPermission([
                                                             "colors.delete",
                                                         ]) && (
-                                                            <Delete
-                                                                URL={
-                                                                    "/account/colors"
-                                                                }
-                                                                id={color.id}
-                                                            />
+                                                            <button className="btn btn-danger btn-sm">
+                                                                <i className="fa fa-trash"></i>
+                                                            </button>
                                                         )}
                                                     </td>
                                                 </tr>
